@@ -1,0 +1,19 @@
+{
+  "name": "amharic_bot",
+  "version": "0.1.0",
+  "description": "Amharic writing telegram bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "amharic",
+    "bot"
+  ],
+  "author": "Nathan Mulugeta <nathanmuler2@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^4.0.0",
+    "node-telegram-bot-api": "^0.27.0"
+  }
+}
