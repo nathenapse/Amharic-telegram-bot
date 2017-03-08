@@ -24,13 +24,14 @@ const am = require('./am.js');
       if (entry) {
         maxInserted = scope['_scope'] ? 0 : maxInserted;
         var sub = finalText.substring(0, finalText.length - (maxInserted));
-        finalText = sub + entry;
         if (scope['_scope']) {
           maxInserted = 1;
         } else {
           maxInserted = maxInserted < entry.length ? entry.length : maxInserted;
         }
+        return  sub + entry;
       }
+      return '';
     }
 
 
@@ -74,8 +75,7 @@ const am = require('./am.js');
 
         if (char) {
           var symbol = getSymbolFromScope(char);
-          writeOnField(symbol);
-          console.log({symbol: symbol, char: char, text:text})
+          finalText = writeOnField(symbol);
           shrinkScope(char);
         }
       })
@@ -116,6 +116,8 @@ const am = require('./am.js');
      */
      this.getAmharic = function(text){
         finalText = ""
+	getInputJson()
+	scope = lang
         return handler(text)
      }
 
