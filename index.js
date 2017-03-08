@@ -38,7 +38,7 @@ bot.on("inline_query", (query) => {
         }
       }
     }) 
-  bot.answerInlineQuery(query.id, result);
+  bot.answerInlineQuery(query.id, result, {cache_time: 0});
 });
 bot.on('polling_error', (error) => {
   console.log(error.code); 

@@ -75,6 +75,7 @@ const am = require('./am.js');
         if (char) {
           var symbol = getSymbolFromScope(char);
           writeOnField(symbol);
+          console.log({symbol: symbol, char: char, text:text})
           shrinkScope(char);
         }
       })
