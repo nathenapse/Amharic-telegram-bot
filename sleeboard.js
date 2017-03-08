@@ -116,8 +116,7 @@ const am = require('./am.js');
      */
      this.getAmharic = function(text){
         finalText = ""
-	getInputJson()
-	scope = lang
+        scope = lang
         return handler(text)
      }
 
