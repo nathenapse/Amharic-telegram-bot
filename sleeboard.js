@@ -65,93 +65,12 @@ const am = require('./am.js');
     }
 
     /**
-     * Get Character from Event
-     * @param event
-     * @returns {*}
-     */
-/*    function getChar(event) {
-      if (event.which == null) {
-        return String.fromCharCode(event.keyCode); // IE
-      } else if (event.which != 0 && event.charCode != 0) {
-        return String.fromCharCode(event.which);   // the rest
-      } else {
-        return null; // special key
-      }
-    }
-*/
-
-    /**
-     * Add Event to Field
-     */
-/*    function addEvent(select) {
-      Array.prototype.map.call(document.querySelectorAll(select), browserSensitiveAddEvent);
-    }
-*/
-    /**
-     * Support ie8 when adding event
-     * @param target
-     */
-/*    function browserSensitiveAddEvent(target) {
-      if (target.addEventListener) {
-        target.addEventListener('keypress', pressEventHandler);
-        target.addEventListener('keydown', keyDownEventHandler);
-        target.addEventListener('focusout', focusOutEventHandler);
-      } else if (target.attachEvent) {
-        target.attachEvent('keypress', pressEventHandler);
-        target.attachEvent('keydown', keyDownEventHandler);
-        target.attachEvent('focusout', focusOutEventHandler);
-      }
-    }
-*/
-    /**
-     * Remove Events from Field
-     */
-/*    function removeEvent(select) {
-      Array.prototype.map.call(document.querySelectorAll(select), browserSensitiveRemoveEvent);
-    }
-*/
-    /**
-     * Support ie8 when removing event
-     * @param target
-     */
-/*    function browserSensitiveRemoveEvent(target) {
-      if (target.removeEventListener) {
-        target.removeEventListener('keypress', pressEventHandler);
-        target.removeEventListener('keydown', keyDownEventHandler);
-        target.removeEventListener('focusout', focusOutEventHandler);
-      } else if (target.detachEvent) {
-        target.detachEvent('keypress', pressEventHandler);
-        target.detachEvent('keydown', keyDownEventHandler);
-        target.detachEvent('focusout', focusOutEventHandler);
-      }
-    }
-*/
-    /**
-     * KeyDown Event Handler
-     * Change scope if key down in ignore key
-     * @param event
-     */
- /*   function keyDownEventHandler(event) {
-      if (ignoreKeyCodes.indexOf(event.keyCode) !== -1) {
-        scope = lang;
-      }
-    }
-*/
-    /**
-     * Focus Out Event Handler
-     * Change scope if focus out
-     */
-/*    function focusOutEventHandler() {
-      scope = lang;
-    }
-*/
-    /**
-     * Key press Event Handler
-     * @param event
+     * handler
+     * @param text
      */
     function handler(text) {
-      var result = text.split('');
-      result.forEach(char => {
+      var splitString = text.split('');
+      splitString.forEach(char => {
 
         if (char) {
           var symbol = getSymbolFromScope(char);
@@ -159,7 +78,27 @@ const am = require('./am.js');
           shrinkScope(char);
         }
       })
-      return finalText;
+      var keyvalue = [];
+      if(!scope['_scope']){
+        var example = finalText.slice(0, -1);
+        keyvalue = Object.keys(scope).map((key)=>{
+         var chars = key;
+         var scopeCopy = scope;
+         var value = scopeCopy[key].value
+         while(!scopeCopy[key].value){
+          scopeCopy = scopeCopy[key].next
+          key = Object.keys(scopeCopy)[0]
+          chars = chars + key
+          value = scopeCopy[key].value
+         }
+         var result = example+value
+         return {chars, result}
+        })
+        keyvalue.unshift({chars: '', result: finalText})
+      }else {
+        keyvalue.unshift({chars: '', result: finalText})
+      }
+      return keyvalue;
     }
 
     /**

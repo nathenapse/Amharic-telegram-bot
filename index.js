@@ -27,17 +27,18 @@ bot.onText(/\/help/, (msg, match) => {
 bot.on("inline_query", (query) => {
   var searchTerm = query.query.trim();
   var answer = sleeboard.getAmharic(searchTerm)
-  
-  bot.answerInlineQuery(query.id, [
-      {
+  var result = answer.map(item => {
+      return {
         type: "article",
-        id: "amharicbotid",
-        title: answer,
+        id: "amharicbotid"+searchTerm+ item.chars,
+        title: item.result,
+        description: searchTerm + item.chars,
         input_message_content: {
-          message_text: answer
+          message_text: item.result
         }
       }
-    ]);
+    }) 
+  bot.answerInlineQuery(query.id, result);
 });
 bot.on('polling_error', (error) => {
   console.log(error.code); 
