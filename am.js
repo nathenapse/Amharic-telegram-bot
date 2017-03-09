@@ -135,7 +135,12 @@ module.exports = {
                 },
                 "u": {
                   "value": "ሹ",
-                  "next": null
+                  "next": {
+                    "a": {
+                      "value": "ሿ",
+                      "next": null
+                    }
+                  }
                 },
                 "o": {
                   "value": "ሾ",
@@ -179,7 +184,12 @@ module.exports = {
                 },
                 "u": {
                   "value": "ሡ",
-                  "next": null
+                  "next": {
+                    "a": {
+                      "value": "ሧ",
+                      "next": null
+                    }
+                  }
                 },
                 "o": {
                   "value": "ሦ",
@@ -189,7 +199,12 @@ module.exports = {
             },
             "u": {
               "value": "ሱ",
-              "next": null
+              "next": {
+                "a": {
+                  "value": "ሷ",
+                  "next": null
+                }
+              }
             },
             "o": {
               "value": "ሶ",
@@ -233,7 +248,12 @@ module.exports = {
             },
             "u": {
               "value": "ቩ",
-              "next": null
+              "next": {
+                "a": {
+                  "value": "ቯ",
+                  "next": null
+                }
+              }
             },
             "o": {
               "value": "ቮ",
@@ -416,7 +436,12 @@ module.exports = {
             },
             "u": {
               "value": "ሩ",
-              "next": null
+              "next": {
+                "a": {
+                  "value": "ሯ",
+                  "next": null
+                }
+              }
             },
             "o": {
               "value": "ሮ",
@@ -669,7 +694,12 @@ module.exports = {
                 },
                 "u": {
                   "value": "ጩ",
-                  "next": null
+                  "next": {
+                    "a": {
+                      "value": "ጯ",
+                      "next": null
+                    }
+                  }
                 },
                 "o": {
                   "value": "ጮ",
@@ -679,7 +709,12 @@ module.exports = {
             },
             "u": {
               "value": "ቹ",
-              "next": null
+              "next": {
+                "a": {
+                  "value": "ቿ",
+                  "next": null
+                }
+              }
             },
             "o": {
               "value": "ቾ",
@@ -723,7 +758,12 @@ module.exports = {
             },
             "u": {
               "value": "ቡ",
-              "next": null
+              "next": {
+                "a": {
+                  "value": "ቧ",
+                  "next": null
+                }
+              }
             },
             "o": {
               "value": "ቦ",
@@ -783,7 +823,12 @@ module.exports = {
                 },
                 "u": {
                   "value": "ዹ",
-                  "next": null
+                  "next": {
+                    "a": {
+                      "value": "ዿ",
+                      "next": null
+                    }
+                  }
                 },
                 "o": {
                   "value": "ዾ",
@@ -811,7 +856,12 @@ module.exports = {
             },
             "u": {
               "value": "ዱ",
-              "next": null
+              "next": {
+                "a": {
+                  "value": "ዷ",
+                  "next": null
+                }
+              }
             },
             "o": {
               "value": "ዶ",
@@ -882,13 +932,8 @@ module.exports = {
                   "value": null,
                   "next": {
                     "a": {
-                      "value": null,
-                      "next": {
-                        "a": {
-                          "value": "ጟ",
-                          "next": null
-                        }
-                      }
+                      "value": "ጟ",
+                      "next": null
                     }
                   }
                 },
@@ -903,7 +948,12 @@ module.exports = {
                 },
                 "u": {
                   "value": "ጙ",
-                  "next": null
+                  "next": {
+                    "a": {
+                      "value": "ጟ",
+                      "next": null
+                    }
+                  }
                 },
                 "o": {
                   "value": "ጞ",
@@ -1003,7 +1053,12 @@ module.exports = {
             },
             "u": {
               "value": "ፉ",
-              "next": null
+              "next": {
+                "a": {
+                  "value": "ፏ",
+                  "next": null
+                }
+              }
             },
             "o": {
               "value": "ፎ",
@@ -1072,7 +1127,12 @@ module.exports = {
                 },
                 "u": {
                   "value": "ሑ",
-                  "next": null
+                  "next": {
+                    "a": {
+                      "value": "ሗ",
+                      "next": null
+                    }
+                  }
                 },
                 "o": {
                   "value": "ሖ",
@@ -1278,7 +1338,12 @@ module.exports = {
             },
             "u": {
               "value": "ጁ",
-              "next": null
+              "next": {
+                "a": {
+                  "value": "ጇ",
+                  "next": null
+                }
+              }
             },
             "o": {
               "value": "ጆ",
@@ -1331,7 +1396,12 @@ module.exports = {
             },
             "u": {
               "value": "ሙ",
-              "next": null
+              "next": {
+                "a": {
+                  "value": "ሟ",
+                  "next": null
+                }
+              }
             },
             "o": {
               "value": "ሞ",
@@ -1375,7 +1445,12 @@ module.exports = {
             },
             "u": {
               "value": "ሉ",
-              "next": null
+              "next": {
+                "a": {
+                  "value": "ሏ",
+                  "next": null
+                }
+              }
             },
             "o": {
               "value": "ሎ",
@@ -1435,7 +1510,12 @@ module.exports = {
                 },
                 "u": {
                   "value": "ኙ",
-                  "next": null
+                  "next": {
+                    "a": {
+                      "value": "ኟ",
+                      "next": null
+                    }
+                  }
                 },
                 "o": {
                   "value": "ኞ",
@@ -1463,7 +1543,12 @@ module.exports = {
             },
             "u": {
               "value": "ኑ",
-              "next": null
+              "next": {
+                "a": {
+                  "value": "ኗ",
+                  "next": null
+                }
+              }
             },
             "o": {
               "value": "ኖ",
@@ -1570,7 +1655,12 @@ module.exports = {
                 },
                 "u": {
                   "value": "ጱ",
-                  "next": null
+                  "next": {
+                    "a": {
+                      "value": "ጷ",
+                      "next": null
+                    }
+                  }
                 },
                 "o": {
                   "value": "ጶ",
@@ -1580,7 +1670,12 @@ module.exports = {
             },
             "u": {
               "value": "ፑ",
-              "next": null
+              "next": {
+                "a": {
+                  "value": "ፗ",
+                  "next": null
+                }
+              }
             },
             "o": {
               "value": "ፖ",
@@ -1730,7 +1825,12 @@ module.exports = {
                 },
                 "u": {
                   "value": "ዡ",
-                  "next": null
+                  "next": {
+                    "a": {
+                      "value": "ዧ",
+                      "next": null
+                    }
+                  }
                 },
                 "o": {
                   "value": "ዦ",
@@ -1740,7 +1840,12 @@ module.exports = {
             },
             "u": {
               "value": "ዙ",
-              "next": null
+              "next": {
+                "a": {
+                  "value": "ዟ",
+                  "next": null
+                }
+              }
             },
             "o": {
               "value": "ዞ",
@@ -1800,7 +1905,12 @@ module.exports = {
                 },
                 "u": {
                   "value": "ጹ",
-                  "next": null
+                  "next": {
+                    "a": {
+                      "value": "ጿ",
+                      "next": null
+                    }
+                  }
                 },
                 "o": {
                   "value": "ጾ",
@@ -1862,7 +1972,12 @@ module.exports = {
                 },
                 "u": {
                   "value": "ጡ",
-                  "next": null
+                  "next": {
+                    "a": {
+                      "value": "ጧ",
+                      "next": null
+                    }
+                  }
                 },
                 "o": {
                   "value": "ጦ",
@@ -1897,9 +2012,14 @@ module.exports = {
                 },
                 "u": {
                   "value": "ፁ",
-                  "next": null
+                  "next": {
+                    "a": {
+                      "value": "ፇ",
+                      "next": null
+                    }
+                  }
                 },
-                "o": {
+                "w": {
                   "value": "ፆ",
                   "next": {
                     "a": {
@@ -1912,7 +2032,12 @@ module.exports = {
             },
             "u": {
               "value": "ቱ",
-              "next": null
+              "next": {
+                "a": {
+                  "value": "ቷ",
+                  "next": null
+                }
+              }
             },
             "o": {
               "value": "ቶ",
