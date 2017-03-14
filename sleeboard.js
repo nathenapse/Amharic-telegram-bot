@@ -71,12 +71,16 @@ const am = require('./am.js');
      */
     function handler(text) {
       var splitString = text.split('');
+      var asterisk = 2;
       splitString.forEach(char => {
-
-        if (char) {
+        asterisk = char == '*' ? asterisk + 1 : asterisk;
+        if (char && asterisk % 2 == 0 && char != '*') {
           var symbol = getSymbolFromScope(char);
           finalText = writeOnField(symbol);
           shrinkScope(char);
+        } else if(char && asterisk % 2 != 0 && char != '*'){
+          finalText = finalText+char 
+          scope = lang
         }
       })
       var keyvalue = [];
