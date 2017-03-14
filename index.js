@@ -1,5 +1,6 @@
 require('dotenv').config()
 const TelegramBot = require('node-telegram-bot-api');
+const uuid = require('uuid/v4');
 const sleeboard = require('./sleeboard.js');
 
 // replace the value below with the Telegram token you receive from @BotFather
@@ -30,7 +31,7 @@ bot.on("inline_query", (query) => {
   var result = answer.map(item => {
       return {
         type: "article",
-        id: "amharicbotid"+searchTerm+ item.chars,
+        id: uuid(),
         title: item.result,
         description: searchTerm + item.chars,
         input_message_content: {
