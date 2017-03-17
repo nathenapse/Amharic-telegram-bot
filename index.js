@@ -31,11 +31,11 @@ bot.on("inline_query", (query) => {
   var result = answer.map(item => {
       var itemResult = item.result;
       var term = searchTerm;
-      if(item.result > 48){
+      if(item.result.length > 48){
         var itemResult = ".."+item.result.slice(-52);
       }
 
-      if(searchTerm > 90){
+      if(searchTerm.length > 90){
         term = ".."+ searchTerm.slice(-90);
       }
 
