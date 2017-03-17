@@ -29,11 +29,21 @@ bot.on("inline_query", (query) => {
   var searchTerm = query.query.trim();
   var answer = sleeboard.getAmharic(searchTerm)
   var result = answer.map(item => {
+      var itemResult = item.result;
+      var term = searchTerm;
+      if(item.result > 48){
+        var itemResult = ".."+item.result.slice(-52);
+      }
+
+      if(searchTerm > 90){
+        term = ".."+ searchTerm.slice(-90);
+      }
+
       return {
         type: "article",
         id: uuid(),
-        title: item.result,
-        description: searchTerm + item.chars,
+        title: itemResult,
+        description: term + item.chars,
         input_message_content: {
           message_text: item.result
         }
