@@ -2069,5 +2069,9 @@ module.exports = {
         "/": {
           "value": "፨",
           "next": null
+        },
+        "?": {
+          "value": "፧",
+          "next": null
         }
       }
