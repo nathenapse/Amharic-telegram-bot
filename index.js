@@ -29,6 +29,9 @@ bot.on("inline_query", (query) => {
   var searchTerm = query.query.trim();
   var answer = sleeboard.getAmharic(searchTerm)
   var result = answer.map(item => {
+      if(item.result.length > 52){
+        
+      }
       return {
         type: "article",
         id: uuid(),

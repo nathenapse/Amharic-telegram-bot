@@ -20,7 +20,7 @@ const am = require('./am.js');
      * @param vm
      * @param entry
      */
-    function writeOnField(entry) {
+    function writeOnField(entry, finalText) {
       if (entry) {
         maxInserted = scope['_scope'] ? 0 : maxInserted;
         var sub = finalText.substring(0, finalText.length - (maxInserted));
@@ -31,7 +31,7 @@ const am = require('./am.js');
         }
         return  sub + entry;
       }
-      return '';
+      return finalText;
     }
 
 
@@ -75,8 +75,9 @@ const am = require('./am.js');
       splitString.forEach(char => {
         asterisk = char == '*' ? asterisk + 1 : asterisk;
         if (char && asterisk % 2 == 0 && char != '*') {
+          char = char.toLowerCase();
           var symbol = getSymbolFromScope(char);
-          finalText = writeOnField(symbol);
+          finalText = writeOnField(symbol, finalText);
           shrinkScope(char);
         } else if(char && asterisk % 2 != 0 && char != '*'){
           finalText = finalText+char 
