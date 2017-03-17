@@ -1,11 +1,11 @@
 'use strict'
 module.exports = {
-      "a": {
-        "value": "አ",
-        "next": null
-      },
-      "e": {
-        "value": "እ", 
+        "a": {
+          "value": "አ",
+          "next": null
+        },
+        "e": {
+          "value": "እ", 
           "next": {
             "e": {
               "value": "ኤ",
@@ -2044,5 +2044,30 @@ module.exports = {
               "next": null
             }
           }
+        },
+        ":": {
+          "value": "፡",
+          "next": {
+            ":": {
+              "value": "።",
+              "next": null
+            }
+          }
+        },
+        ".": {
+          "value": "።",
+          "next": null
+        },
+        ";": {
+          "value": "፤",
+          "next": null
+        },
+        ",": {
+          "value": "፣",
+          "next": null
+        },
+        "/": {
+          "value": "፨",
+          "next": null
         }
       }

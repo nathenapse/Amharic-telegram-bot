@@ -121,6 +121,7 @@ const am = require('./am.js');
      this.getAmharic = function(text){
         finalText = ""
         scope = lang
+        maxInserted = 0
         return handler(text)
      }
 
