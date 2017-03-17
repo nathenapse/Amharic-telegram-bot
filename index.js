@@ -28,15 +28,19 @@ bot.onText(/\/help/, (msg, match) => {
 bot.on("inline_query", (query) => {
   var searchTerm = query.query.trim();
   var answer = sleeboard.getAmharic(searchTerm)
+  var term = searchTerm;
+
+  if(searchTerm.length > 90){
+    term = ".."+ searchTerm.slice(-90);
+  }
+
   var result = answer.map(item => {
       var itemResult = item.result;
-      var term = searchTerm;
       if(item.result.length > 48){
-        var itemResult = ".."+item.result.slice(-52);
+        itemResult = ".."+item.result.slice(-52);
       }
-
-      if(searchTerm.length > 90){
-        term = ".."+ searchTerm.slice(-90);
+      if(item.result.length > 256) {
+        itemResult = "!!! CHARACTER LIMIT EXCEEDED !!!"
       }
 
       return {
