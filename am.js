@@ -2067,11 +2067,21 @@ module.exports = {
           "next": null
         },
         "/": {
-          "value": "፨",
-          "next": null
+          "value": "/",
+          "next": {
+            "/":{
+              "value": "፨"
+              "next": null
+            }
+          }
         },
         "?": {
-          "value": "፧",
-          "next": null
+          "value": "?",
+          "next": {
+            "?": {
+              "value": "፧",
+              "next": null
+            }
+          }
         }
       }

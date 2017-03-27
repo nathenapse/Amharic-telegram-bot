@@ -45,16 +45,7 @@ bot.onText(/\/help/, (msg, match) => {
 
 bot.on("inline_query", (query) => {
   var searchTerm = query.query.trim();
-
-  pool.connect(function(err, client, done) {
-    if(err) {
-      return console.error('error fetching client from pool', err);
-    }
-    client.query('INSERT INTO users VALUES ($1);', [query.from.id], function(err, result) {
-      done(err);
-    });
-  });
-
+  var chatId = query.from.id;
   var answer = sleeboard.getAmharic(searchTerm)
   var term = searchTerm;
 
@@ -81,6 +72,30 @@ bot.on("inline_query", (query) => {
         }
       }
     }) 
+
+  pool.connect(function(err, client, done) {
+    if(err) {
+      return;
+    }
+    client.query('INSERT INTO users VALUES ($1::int);', [query.from.id], function(err, result) {
+      client.query('SELECT id FROM users WHERE id=$1 AND collect=$2;', [chatId, true], (err, result) => {
+        //call `done(err)` to release the client back to the pool (or destroy it if there is an error)
+        var user = '';
+
+        if(result.rows.length > 0 && result.rows[0].id){
+          user = result.rows[0].id
+        }
+        client.query('INSERT INTO data ("user", "query", "options") VALUES ($1::int,$2,$3);', [user, searchTerm, answer[0]], (err, result) => {
+          done(err);
+          if(err) {
+            return;
+          }
+        });
+      });
+    });
+  });
+
+
   bot.answerInlineQuery(query.id, result);
 });
 
