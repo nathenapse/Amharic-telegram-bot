@@ -29,7 +29,28 @@ const bot = new TelegramBot(token, {polling: true});
 
 bot.getMe().then(function(err, result){
   console.log(err, result)
-  })
+})
+
+// Add a data collection command
+bot.onText(/\/collect/, (msg, match) => {
+  
+  pool.connect(function(err, client, done) {
+    if(err) {
+      return console.error('error fetching client from pool', err);
+    }
+    client.query('INSERT INTO users (id, collect) VALUES ($1, $2);', [msg.chat.id, true], function(err, result) {
+      //call `done(err)` to release the client back to the pool (or destroy it if there is an error)
+      done(err);
+
+      if(err) {
+        return console.error('error running query', err);
+      }
+      console.log(result.rows[0].number);
+      //output: 1
+    });
+  });
+});
+
 // Matches "/echo [whatever]"
 bot.onText(/\/help/, (msg, match) => {
   // 'msg' is the received Message from Telegram
@@ -49,15 +70,20 @@ bot.on("inline_query", (query) => {
   var answer = sleeboard.getAmharic(searchTerm)
   var term = searchTerm;
 
+  // Check Telegram text display limit for description to that the user looks at what they are typeing
+  // not the starting text 
   if(searchTerm.length > 90){
     term = ".."+ searchTerm.slice(-90);
   }
 
   var result = answer.map(item => {
       var itemResult = item.result;
+      // Check Telegram text display limit for title to that the user looks at what they are typeing
+      // not the starting text 
       if(item.result.length > 48){
         itemResult = ".."+item.result.slice(-52);
       }
+      // Check Telegram inline bot return limit
       if(item.result.length > 256) {
         itemResult = "!!! CHARACTER LIMIT EXCEEDED !!!"
       }
@@ -77,14 +103,17 @@ bot.on("inline_query", (query) => {
     if(err) {
       return;
     }
+    // Add user to the list of users how use our bot
     client.query('INSERT INTO users VALUES ($1::int);', [query.from.id], function(err, result) {
+      // Check if the user is a contributor if so add users userid to the data
       client.query('SELECT id FROM users WHERE id=$1 AND collect=$2;', [chatId, true], (err, result) => {
-        //call `done(err)` to release the client back to the pool (or destroy it if there is an error)
-        var user = '';
 
+        var user = '';
+        // user found add it to the data collection
         if(result.rows.length > 0 && result.rows[0].id){
           user = result.rows[0].id
         }
+        // add the query the user sent and the answer they got to the data.
         client.query('INSERT INTO data ("user", "query", "options") VALUES ($1::int,$2,$3);', [user, searchTerm, answer[0]], (err, result) => {
           done(err);
           if(err) {
