@@ -2070,7 +2070,7 @@ module.exports = {
           "value": "/",
           "next": {
             "/":{
-              "value": "፨"
+              "value": "፨",
               "next": null
             }
           }
