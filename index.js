@@ -2,7 +2,25 @@ require('dotenv').config()
 const TelegramBot = require('node-telegram-bot-api');
 const uuid = require('uuid/v4');
 const sleeboard = require('./sleeboard.js');
+const pg = require('pg');
+var config = {
+  user: process.env.PGUSER,
+  database: process.env.PGDATABASE,
+  password: process.env.PGPASSWORD,
+  host: process.env.PGHOST,
+  port: process.env.PGPORT,
+  max: process.env.PGPOOL,
+  idleTimeoutMillis: process.env.PGTIMEOUT,
+};
 
+var pool = new pg.Pool(config);
+
+//this initializes a connection pool
+//it will keep idle connections open for a 30 seconds
+//and set a limit of maximum 10 idle clients
+
+// to run a query we can acquire a client from the pool,
+// run a query on the client, and then return the client to the pool
 // replace the value below with the Telegram token you receive from @BotFather
 const token = process.env.AMHARIC_BOT_TOKEN;
 
@@ -27,6 +45,16 @@ bot.onText(/\/help/, (msg, match) => {
 
 bot.on("inline_query", (query) => {
   var searchTerm = query.query.trim();
+
+  pool.connect(function(err, client, done) {
+    if(err) {
+      return console.error('error fetching client from pool', err);
+    }
+    client.query('INSERT INTO users VALUES ($1);', [query.from.id], function(err, result) {
+      done(err);
+    });
+  });
+
   var answer = sleeboard.getAmharic(searchTerm)
   var term = searchTerm;
 
@@ -55,6 +83,7 @@ bot.on("inline_query", (query) => {
     }) 
   bot.answerInlineQuery(query.id, result);
 });
+
 bot.on('polling_error', (error) => {
   console.log(error.code); 
 });
