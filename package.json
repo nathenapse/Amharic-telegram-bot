@@ -15,6 +15,7 @@
   "dependencies": {
     "dotenv": "^4.0.0",
     "node-telegram-bot-api": "^0.27.0",
+    "pg": "^6.1.5",
     "uuid": "^3.0.1"
   }
 }
