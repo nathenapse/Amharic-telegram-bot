@@ -36,19 +36,17 @@ bot.onText(/\/collect/, (msg, match) => {
   
   pool.connect(function(err, client, done) {
     if(err) {
-      return console.error('error fetching client from pool', err);
+      return
     }
     client.query('INSERT INTO users (id, collect) VALUES ($1, $2);', [msg.chat.id, true], function(err, result) {
-      //call `done(err)` to release the client back to the pool (or destroy it if there is an error)
       done(err);
 
       if(err) {
-        return console.error('error running query', err);
+        return;
       }
-      console.log(result.rows[0].number);
-      //output: 1
     });
   });
+  bot.sendMessage(msg.chat.id, 'Thank you for allowing @AmharicBot to collect your data. Your Privacy is our Priority.');
 });
 
 // Matches "/echo [whatever]"
@@ -110,7 +108,7 @@ bot.on("inline_query", (query) => {
 
         var user = '';
         // user found add it to the data collection
-        if(result.rows.length > 0 && result.rows[0].id){
+        if(result && result.rows.length > 0 && result.rows[0].id){
           user = result.rows[0].id
         }
         // add the query the user sent and the answer they got to the data.
