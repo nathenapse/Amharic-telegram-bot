@@ -12,6 +12,7 @@ var config = {
   max: process.env.PGPOOL,
   idleTimeoutMillis: process.env.PGTIMEOUT,
 };
+const Admin = process.env.ADMIN
 
 var pool = new pg.Pool(config);
 
@@ -38,17 +39,66 @@ bot.onText(/\/collect/, (msg, match) => {
     if(err) {
       return
     }
-    client.query('INSERT INTO users (id, collect) VALUES ($1, $2);', [msg.chat.id, true], function(err, result) {
-      done(err);
+    client.query('SELECT id FROM users WHERE id=$1;', [msg.chat.id], (err, result) => {
+      // user found add it to the data collection
+      if(result && result.rows.length > 0 && result.rows[0].id){
+        client.query('UPDATE users SET collect = $2 WHERE id = $1;', [msg.chat.id, true], function(err, result) {
+          done(err);
 
-      if(err) {
-        return;
+          if(err) {
+            return;
+          }
+        });
+      }else{
+        client.query('INSERT INTO users (id, collect) VALUES ($1, $2);', [msg.chat.id, true], function(err, result) {
+          done(err);
+
+          if(err) {
+            return;
+          }
+        });
       }
+      // add the query the user sent and the answer they got to the data.
     });
   });
   bot.sendMessage(msg.chat.id, 'Thank you for allowing @AmharicBot to collect your data. Your Privacy is our Priority.');
 });
 
+// Get User count
+bot.onText(/\/count/, (msg, match) => {
+  if(msg.chat.id == Admin){
+    pool.connect(function(err, client, done) {
+      if(err) {
+        return
+      }
+      client.query('SELECT COUNT(id) as count from users;', function(err, result) {
+        done(err);
+        if(err) {
+          return;
+        }
+        bot.sendMessage(msg.chat.id, `Number of unique users using @AmharicBot is ${result.rows[0].count}`);
+      });
+    });
+  }
+});
+
+// Get Contributors count
+bot.onText(/\/contributors/, (msg, match) => {
+  if(msg.chat.id == Admin){
+    pool.connect(function(err, client, done) {
+      if(err) {
+        return
+      }
+      client.query('SELECT COUNT(id) as count from users WHERE collect=$1;', [true], function(err, result) {
+        done(err);
+        if(err) {
+          return;
+        }
+        bot.sendMessage(msg.chat.id, `Number of unique contributors @AmharicBot is ${result.rows[0].count}`);
+      });
+    });
+  }
+});
 // Matches "/echo [whatever]"
 bot.onText(/\/help/, (msg, match) => {
   // 'msg' is the received Message from Telegram
