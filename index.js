@@ -156,7 +156,7 @@ bot.on("inline_query", (query) => {
       // Check if the user is a contributor if so add users userid to the data
       client.query('SELECT id FROM users WHERE id=$1 AND collect=$2;', [chatId, true], (err, result) => {
 
-        var user = '';
+        var user = 0;
         // user found add it to the data collection
         if(result && result.rows.length > 0 && result.rows[0].id){
           user = result.rows[0].id
